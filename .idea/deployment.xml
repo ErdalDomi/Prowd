@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" serverName="prowd.inf.unibz.it">
+    <serverData>
+      <paths name="prowd.inf.unibz.it">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/opt/tomcat8/webapps/test" local="$PROJECT_DIR$" web="/test" />
+          </mappings>
+        </serverdata>
+      </paths>
+    </serverData>
+  </component>
+</project>

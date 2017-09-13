@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="61793fb4-4463-44ee-b178-cfd09f95c6d7" name="prowd.inf.unibz.it" url="http://prowd.inf.unibz.it">
+        <fileTransfer host="prowd.inf.unibz.it" port="22" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

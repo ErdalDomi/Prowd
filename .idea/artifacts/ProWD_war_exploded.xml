@@ -1,0 +1,49 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" build-on-make="true" name="ProWD:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/ProWD_war_exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="ProWD/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="ProWD" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="guava-22.0" />
+          <element id="file-copy" path="$PROJECT_DIR$/lib/jena-base-3.3.0.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/lib/jena-core-3.3.0.jar" />
+          <element id="file-copy" path="$USER_HOME$/Desktop/apache-jena-3.3.0/lib/log4j-1.2.17.jar" />
+          <element id="file-copy" path="$USER_HOME$/Desktop/apache-jena-3.3.0/lib/collection-0.6.jar" />
+          <element id="file-copy" path="$USER_HOME$/Desktop/apache-jena-3.3.0/lib/commons-io-2.5.jar" />
+          <element id="file-copy" path="$USER_HOME$/Desktop/apache-jena-3.3.0/lib/httpcore-4.4.4.jar" />
+          <element id="file-copy" path="$USER_HOME$/Desktop/apache-jena-3.3.0/lib/jena-arq-3.3.0.jar" />
+          <element id="file-copy" path="$USER_HOME$/Desktop/apache-jena-3.3.0/lib/jena-iri-3.3.0.jar" />
+          <element id="file-copy" path="$USER_HOME$/Desktop/apache-jena-3.3.0/lib/jena-tdb-3.3.0.jar" />
+          <element id="file-copy" path="$USER_HOME$/Desktop/apache-jena-3.3.0/lib/commons-cli-1.3.jar" />
+          <element id="file-copy" path="$USER_HOME$/Desktop/apache-jena-3.3.0/lib/commons-csv-1.3.jar" />
+          <element id="file-copy" path="$USER_HOME$/Desktop/apache-jena-3.3.0/lib/jena-cmds-3.3.0.jar" />
+          <element id="file-copy" path="$USER_HOME$/Desktop/apache-jena-3.3.0/lib/libthrift-0.9.3.jar" />
+          <element id="file-copy" path="$USER_HOME$/Desktop/apache-jena-3.3.0/lib/xml-apis-1.4.01.jar" />
+          <element id="file-copy" path="$USER_HOME$/Desktop/apache-jena-3.3.0/lib/httpclient-4.5.2.jar" />
+          <element id="file-copy" path="$USER_HOME$/Desktop/apache-jena-3.3.0/lib/slf4j-api-1.7.21.jar" />
+          <element id="file-copy" path="$USER_HOME$/Desktop/apache-jena-3.3.0/lib/commons-lang3-3.4.jar" />
+          <element id="file-copy" path="$USER_HOME$/Desktop/apache-jena-3.3.0/lib/jsonld-java-0.9.0.jar" />
+          <element id="file-copy" path="$USER_HOME$/Desktop/apache-jena-3.3.0/lib/xercesImpl-2.11.0.jar" />
+          <element id="file-copy" path="$USER_HOME$/Desktop/apache-jena-3.3.0/lib/commons-codec-1.10.jar" />
+          <element id="file-copy" path="$USER_HOME$/Desktop/apache-jena-3.3.0/lib/jackson-core-2.7.4.jar" />
+          <element id="file-copy" path="$USER_HOME$/Desktop/apache-jena-3.3.0/lib/slf4j-log4j12-1.7.21.jar" />
+          <element id="file-copy" path="$USER_HOME$/Desktop/apache-jena-3.3.0/lib/jcl-over-slf4j-1.7.21.jar" />
+          <element id="file-copy" path="$USER_HOME$/Desktop/apache-jena-3.3.0/lib/httpclient-cache-4.5.2.jar" />
+          <element id="file-copy" path="$USER_HOME$/Desktop/apache-jena-3.3.0/lib/jackson-databind-2.7.4.jar" />
+          <element id="file-copy" path="$USER_HOME$/Desktop/apache-jena-3.3.0/lib/jena-shaded-guava-3.3.0.jar" />
+          <element id="file-copy" path="$USER_HOME$/Desktop/apache-jena-3.3.0/lib/jena-rdfconnection-3.3.0.jar" />
+          <element id="file-copy" path="$USER_HOME$/Desktop/apache-jena-3.3.0/lib/jackson-annotations-2.7.0.jar" />
+          <element id="file-copy" path="$USER_HOME$/Downloads/jena-core-3.3.0.jar" />
+          <element id="file-copy" path="$USER_HOME$/Downloads/json-20090211.jar" />
+          <element id="file-copy" path="$USER_HOME$/Downloads/jstl-1.2.jar" />
+          <element id="file-copy" path="$USER_HOME$/Downloads/jena-core-3.0.0.jar" />
+        </element>
+        <element id="dir-copy" path="$PROJECT_DIR$/web/css" />
+      </element>
+    </root>
+  </artifact>
+</component>

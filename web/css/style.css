@@ -1,0 +1,39 @@
+#titleDiv{
+	text-align: center;
+	position: relative;
+	top: 0;
+	margin-bottom:20px;
+}
+
+#flexContainer{
+	display:flex;
+}
+
+#createDiv{
+	width:50%;
+}
+
+#createForm{
+	width:70%;
+	margin: auto;
+}
+
+#viewDiv{
+	width:50%;
+}
+
+#regularright{
+	float: right;
+	margin-bottom: 5px;
+	margin-right: 20px;
+}
+
+#right{
+	float: right;
+
+	margin-bottom: 5px;
+}
+
+.attributebutton, .facetbutton, .valuebutton{
+	margin-bottom: 5px;
+}
