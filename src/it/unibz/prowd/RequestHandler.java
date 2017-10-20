@@ -212,6 +212,8 @@ public class RequestHandler extends HttpServlet {
   //to get the P-code labels we have to use a wikidata api endpoint
   //first we send a GET reqeuest to get a json file with the info we need
   //then we use a JSON library to get the value we want
+
+  //example link: https://www.wikidata.org/w/api.php?action=wbgetentities&props=labels&ids=Q76&languages=en
   public String getPropertyName(String code) throws ServletException, IOException{
 
     String returnValue = "";

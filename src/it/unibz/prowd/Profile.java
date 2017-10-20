@@ -150,24 +150,55 @@ public class Profile{
     System.out.println("Total count we got from wolfgang JSON response object extraction: " + totalcount);
     sqlCode += totalcount+", ";
     for(String currentAttrQueryString : populateAttribCount(queryParameters)){
-      String currAttrCount = getResultSet(currentAttrQueryString).next().get("count").asLiteral().getValue().toString();
-
+      responseObj = getQueryResult(currentAttrQueryString);
+      String currAttrCount = null;
+      try {
+        currAttrCount = responseObj.getJSONArray("bindings")
+                .getJSONObject(0)
+                .getJSONObject("count")
+                .getString("value");
+      } catch (JSONException e) {
+        System.out.println("Error: currAttrCount not found in JSONresponseObj");
+        //currAttrCount = 0;
+        e.printStackTrace();
+      }
+      System.out.println("currAttrCount we got from wolfgang JSON response object extraction: " + currAttrCount);
       sqlCode+=currAttrCount+", ";
     }
-    ResultSet prs = getResultSet(populatePercentageSlots(queryParameters));
+
     Map<Integer, Integer> pSlots = new HashMap<>();
     for(Integer currPslot : pSlotsNumbers){
       pSlots.put(currPslot,0);
     }
 
-
-    while(prs.hasNext()){
-      qs = prs.next();
-      String completenessPercentageSlot = qs.getLiteral("completenessPercentage").getValue().toString();
-      String countItemSlot = qs.getLiteral("countItem").getValue().toString();
-
-      pSlots.replace(Integer.parseInt(completenessPercentageSlot), Integer.parseInt(countItemSlot));
+    responseObj = getQueryResult(populatePercentageSlots(queryParameters));
+    System.out.println("percentage slots-->: " + responseObj);
+    try {
+      System.out.println("test json iterable: " + responseObj.getJSONArray("bindings").length());
+      for(int i=0;i<responseObj.getJSONArray("bindings").length();i++){
+        String completenessPercentageSlot = responseObj.getJSONArray("bindings")
+                .getJSONObject(i)
+                .getJSONObject("completenessPercentage")
+                .getString("value");
+        String countItemSlot = responseObj.getJSONArray("bindings")
+                .getJSONObject(i)
+                .getJSONObject("countItem")
+                .getString("value");
+        pSlots.replace(Integer.parseInt(completenessPercentageSlot), Integer.parseInt(countItemSlot));
+      }
+    } catch (JSONException e) {
+      System.out.println("Falied to parse JSON pSlot and pCount");
+      e.printStackTrace();
     }
+    //legacy code below
+//    ResultSet prs = getResultSet(populatePercentageSlots(queryParameters));
+//    while(prs.hasNext()){
+//      qs = prs.next();
+//      String completenessPercentageSlot = qs.getLiteral("completenessPercentage").getValue().toString();
+//      String countItemSlot = qs.getLiteral("countItem").getValue().toString();
+//
+//      pSlots.replace(Integer.parseInt(completenessPercentageSlot), Integer.parseInt(countItemSlot));
+//    }
 
     System.out.println("-->pslots: " + pSlots);
 
@@ -175,28 +206,67 @@ public class Profile{
     ResultSet ers = null;
     Map<Integer, Map<String,String>> elSlots = new HashMap<>();
     int pCounter = 0;
-    Integer currentPercentage=pSlotsNumbers.get(pCounter);
+    Integer currentPercentage=pSlotsNumbers.get(pCounter);//?
     for(String currentEntityQuery : populateEntities(queryParameters)){
       Map<String,String> lSlots = new HashMap<>();
       System.out.println("getting 10 entities for: " + queryParameters);
-      ers = getResultSet(currentEntityQuery);
-      if(ers.hasNext()==false){
-        System.out.println("there is no result set");
-        lSlots.put("","");
-      }
-      while(ers.hasNext()){
-        qs = ers.next();
-        String currentItem = qs.get("item").toString();
-        String currentLabel="";
-        if(qs.getLiteral("label")!=null){
-          currentLabel = qs.getLiteral("label").getValue().toString();
-        } else{
-          currentLabel = qs.get("item").toString();
+      responseObj = getQueryResult(currentEntityQuery);
+      System.out.println("entity responseObj: " + responseObj);
+//      ers = getResultSet(currentEntityQuery);//legacy
+
+      //mabye just make a throws JSONException signature on the method...
+      try {
+        if(responseObj.getJSONArray("bindings").length()==0){
+          System.out.println("there seems to be no label for this entity");
+          lSlots.put("","");
         }
-        currentLabel = currentLabel.replace('\'',' '); //clean '-s
-        currentLabel = currentLabel.replace(',', ' '); //clean ,-s
-        lSlots.put(currentItem,currentLabel);
+      } catch (JSONException e) {
+        e.printStackTrace();
       }
+//      if(ers.hasNext()==false){//legacy
+//        System.out.println("there is no result set");
+//        lSlots.put("","");
+//      }
+      try {
+        System.out.println("entity json iterable: " + responseObj.getJSONArray("bindings").length());
+        for(int i=0;i<responseObj.getJSONArray("bindings").length();i++){
+          String currentItem = responseObj.getJSONArray("bindings")
+                  .getJSONObject(i)
+                  .getJSONObject("item")
+                  .getString("value");
+          String currentLabel = "";
+          //labels are not present in the wolfgang.unibz.it server so get them
+          // from  the &wbgetentities wikidata api
+          //might have to count the average number of lables and see if that bursts down the server
+          if(responseObj.getJSONArray("bindings")
+                  .getJSONObject(i).getJSONObject("label") != null){
+            currentLabel = responseObj.getJSONArray("bindings")
+                    .getJSONObject(i).getJSONObject("label").getString("value");
+          } else {
+            currentLabel = responseObj.getJSONArray("bindings")
+                    .getJSONObject(i).getJSONObject("item").getString("value");
+          }
+          currentLabel = currentLabel.replace('\'',' '); //clean '-s
+          currentLabel = currentLabel.replace(',', ' '); //clean ,-s
+          lSlots.put(currentItem,currentLabel);
+          }
+      } catch (JSONException e) {
+        System.out.println("Falied to parse JSON pSlot and pCount");
+        e.printStackTrace();
+      }
+//      while(ers.hasNext()){
+//        qs = ers.next();
+//        String currentItem = qs.get("item").toString();
+//        String currentLabel="";
+//        if(qs.getLiteral("label")!=null){
+//          currentLabel = qs.getLiteral("label").getValue().toString();
+//        } else{
+//          currentLabel = qs.get("item").toString();
+//        }
+//        currentLabel = currentLabel.replace('\'',' '); //clean '-s
+//        currentLabel = currentLabel.replace(',', ' '); //clean ,-s
+//        lSlots.put(currentItem,currentLabel);
+//      }
 
       currentPercentage=pSlotsNumbers.get(pCounter);
       pCounter++;
