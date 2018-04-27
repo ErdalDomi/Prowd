@@ -14,7 +14,7 @@ public class DatabaseAPI {
   static int connectionCount = 0;
   public DatabaseAPI(){
 
-    System.out.println("Creating new database connection...");
+    System.out.println("Creating new database connection in DatabaseAPI class.");
 
     try {
       Class.forName("org.postgresql.Driver");
@@ -36,7 +36,8 @@ public class DatabaseAPI {
     }
 
     if (connection != null) {
-      System.out.println("Connection created. ");
+      connectionCount++;
+      System.out.println("Connection created. Static connection count: " + connectionCount);
 
 
     } else {
@@ -46,40 +47,7 @@ public class DatabaseAPI {
   }
 
   public Connection getConnection(){
-    connectionCount++;
-    System.out.println("Getting static connection " + connectionCount+" .");
+    System.out.println("Getting static connection.");
     return this.connection;
   }
-
-//  public void createTable(Profile profile){
-//
-//    PreparedStatement ps = null;
-//    String sqlCode = "create table " + profile.name + " (";
-//
-//    for(Facet currentFacet : profile.facets){
-//      sqlCode +=currentFacet.attr.name + " varchar, ";
-//    }
-//    sqlCode += "total integer, ";
-//    for(Attribute currentAttribute : profile.attrs){
-//      sqlCode += currentAttribute.name+"Count" + " int, ";
-//    }
-//
-//    int attrCount = profile.attrs.size();
-//    for(int i = 0; i <= attrCount; i++){
-//      sqlCode += "p"+(100/attrCount*i)+" integer, ";
-//      sqlCode += "e"+(100/attrCount*i)+" varchar, ";
-//      sqlCode += "bin_vec"+(100/attrCount*i)+" varchar, ";
-//    }
-//    sqlCode = sqlCode.substring(0, sqlCode.length()-2);
-//    sqlCode += ");";
-//    System.out.println("SQLcode: "+sqlCode);
-//
-//    try {
-//      ps = connection.prepareStatement(sqlCode);
-//      ps.executeUpdate();
-//      ps.close();
-//    } catch (SQLException e) {
-//      e.printStackTrace();
-//    }
-//  }
 }

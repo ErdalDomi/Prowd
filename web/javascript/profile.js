@@ -45,7 +45,7 @@ $(document).ready(function(){
         //dataObj = dataObj.substr(0,dataObj.length-1);
         console.log(dataObj);
         $.ajax({
-            type: "GET",
+            method: "GET",
             url: "/info?"+dataObj,
             success: function(response){
                 document.getElementById("responseTable").innerHTML = "";

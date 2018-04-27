@@ -2,6 +2,8 @@ package it.unibz.prowd;
 
 /**
  * Created by e7250 on 6/19/2017.
+ * This class defines the attributes of the profile. These attributes determine the completeness of the
+ * profiles, by our definition and approach. Complete means the attribute value exists in the entity wikidata page.
  */
 public class Attribute {
   String name = "";
@@ -19,6 +21,7 @@ public class Attribute {
     this.name = name;
   }
 
+  //This function will clean whitespace characters so it plays well with the database
   public String getNameforDB(){
     String returnString="";
 
@@ -26,7 +29,7 @@ public class Attribute {
       returnString=this.code;
     } else{
       returnString = this.name.replace(" ", "");
-      System.out.print("Attr name changed into: " + returnString);
+      System.out.print("Attribute name changed into: " + returnString +" for database purposes.");
     }
     return returnString;
   }

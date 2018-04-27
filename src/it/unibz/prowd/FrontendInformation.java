@@ -15,15 +15,14 @@ import java.util.Enumeration;
 public class FrontendInformation extends HttpServlet {
   @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    System.out.println("-------- PostgreSQL " + "JDBC Connection Frontendinfo ------------");
+    System.out.println("Requesting information to display chart table.");
     Connection connection = new DatabaseAPI().getConnection();
     Statement statement = null;
     ResultSet rs = null;
 
-
-    //----------------------------
     Enumeration<String> reqData = request.getParameterNames();
     String profileName = request.getParameter("name");
+    System.out.println("Information is being requested for profile: " + profileName);
     String query = "select * from attrxprofile where name='"+profileName+"'";
     int attrCount = 0;
     int total = 0;
@@ -33,7 +32,9 @@ public class FrontendInformation extends HttpServlet {
     ArrayList<String> columnNames = new ArrayList<>();
     ArrayList<String> valueCodes = new ArrayList<>();
     try {
+      statement = connection.createStatement();//....
       rs = statement.executeQuery(query);
+      System.out.println("Sent query to database");
       while(rs.next()){
         attributeList.add(rs.getString("attrcode"));
         attributeNames.add(rs.getString("attr"));
@@ -46,7 +47,7 @@ public class FrontendInformation extends HttpServlet {
       }
       while(reqData.hasMoreElements()) {
         String currElm = reqData.nextElement().toString();
-        System.out.println("request.getparam currelm: " + request.getParameter(currElm));
+        System.out.println("Facet value: " + request.getParameter(currElm));
         query = "select valuecode from valuesxfacet where value='"+request.getParameter(currElm)+"'";
         rs = statement.executeQuery(query);
         while(rs.next()){
@@ -76,7 +77,7 @@ public class FrontendInformation extends HttpServlet {
     query = "select ";
     for(String currPSlot : pSlots){
       query += currPSlot + ", ";
-    }
+    }//!!! what about properties with code p0 p33 p50 p66 and p100??? duplicate coulumn name = error
     query = query.substring(0,query.length()-2);
     query += " from " + profileName+ " where ";
 
